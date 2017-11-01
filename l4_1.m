@@ -18,9 +18,9 @@ clc;
  a = 1;
  y = filter(b,a,x);
 figure(1)
-subplot(311), plot(y), xlim([1,400]), title ('Відфільтрований сигнал'), xlabel('t'), ylabel('y'); 
-subplot(312), plot(x), xlim([1,400]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
-subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
+subplot(311), plot(t,y), xlim([0,2]), title ('Відфільтрований сигнал'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
 
 ... 
 % ------ АЧХ фільтру Вінера
@@ -36,9 +36,9 @@ subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму'), xlab
  b = wiener_hopf(x,s,L);	   % обчислення коефіцієнтів
  y = filter(b,a,x);
 figure(3)
-subplot(311), plot(y), xlim([1,400]), title ('Відфільтрований сигнал, L = 128'), xlabel('t'), ylabel('y'); 
-subplot(312), plot(x), xlim([1,400]), title ('Початковий сигнал з шумом, L = 128'), xlabel('t'), ylabel('x'); 
-subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму, L = 128'), xlabel('t'), ylabel('s'); 
+subplot(311), plot(t,y), xlim([0,2]), title ('Відфільтрований сигнал, L = 128'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом, L = 128'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму, L = 128'), xlabel('t'), ylabel('s'); 
 
 % ------ АЧХ фільтру Вінера
  n = 512;  % кількість точок, що розраховуються
@@ -54,9 +54,9 @@ subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму, L = 12
   b = wiener_hopf(x,s,L);	   % обчислення коефіцієнтів
  y = filter(b,a,x);
 figure(5)
-subplot(311), plot(y), xlim([1,400]), title ('Відфільтрований сигнал, L = 256'), xlabel('t'), ylabel('y'); 
-subplot(312), plot(x), xlim([1,400]), title ('Початковий сигнал з шумом, L = 256'), xlabel('t'), ylabel('x'); 
-subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму, L = 256'), xlabel('t'), ylabel('s'); 
+subplot(311), plot(t,y), xlim([0,2]), title ('Відфільтрований сигнал, L = 256'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом, L = 256'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму, L = 256'), xlabel('t'), ylabel('s'); 
 
 ... 
 % ------ АЧХ фільтру Вінера
@@ -66,3 +66,23 @@ subplot(313), plot(s), xlim([1,400]), title ('Початковий сигнал без шуму, L = 25
  mag = abs(h);
  plot(w/(2*pi)*fs,mag),title ('АЧХ, L = 256'),grid on
  dispersia_256=var(y)
+ 
+ 
+ 
+ % L = 64
+ L = 64; 			       % порядок фільтра
+ b = wiener_hopf(x,s,L);	   % обчислення коефіцієнтів
+ y = filter(b,a,x);
+figure(7)
+subplot(311), plot(t,y), xlim([0,2]), title ('Відфільтрований сигнал, L = 64'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом, L = 64'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму, L = 64'), xlabel('t'), ylabel('s'); 
+
+... 
+% ------ АЧХ фільтру Вінера
+ n = 512;  % кількість точок, що розраховуються
+ figure(8)
+ [h,w]=freqz(b,a,n);
+ mag = abs(h);
+ plot(w/(2*pi)*fs,mag),title ('АЧХ, L = 64'),grid on
+ dispersia_64=var(y)
