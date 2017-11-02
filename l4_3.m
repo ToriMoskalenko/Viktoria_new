@@ -3,7 +3,7 @@ clear
 close all
 %=== Завдання #3.1 ===
 % Моделювання досліджуваного сигналу
-fs =  200; N =  400;
+fs =  200; N =  4000;
 t = (0:(N-1))/fs ;	
 s1=sin(2*pi*10*t);
 s2=sin(2*pi*20*t);
@@ -49,4 +49,32 @@ subplot(514), plot(t,y), xlim([0,4]), title ('Відфільтрований сигнал, mu = 0.001
 mu = 0.01 ;
 [y,e,w] = lms(x,s,mu,L);
 subplot(515), plot(t,y), xlim([0,4]), title ('Відфільтрований сигналу, mu = 0.01 ;'), xlabel('t'), ylabel('s'); 
+
+% Дослідження процедури адаптивної фільтрації при різній довжині фільтру
+
+L = 256 ; mu = 0.0001 ;
+[y,e,w] = lms(x,s,mu,L);
+% Графіки результату фільтрації
+figure(4)
+subplot(311), plot(t,y), xlim([0,4]), title ('Відфільтрований сигнал,L = 256'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
+
+
+
+L = 512 ; mu = 0.0001 ;
+[y,e,w] = lms(x,s,mu,L);
+% Графіки результату фільтрації
+figure(5)
+subplot(311), plot(t,y), xlim([0,3]), title ('Відфільтрований сигнал,L = 512'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
+
+L = 1024 ; mu = 0.0001 ;
+[y,e,w] = lms(x,s,mu,L);
+% Графіки результату фільтрації
+figure(6)
+subplot(311), plot(t,y), xlim([0,9]), title ('Відфільтрований сигнал,L = 1024'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
 
