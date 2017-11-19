@@ -7,16 +7,16 @@ fs = 200;
 f0 =  5;
 A =  0.5;
 D =  0.25;
-N =  500;
+N =  1000;
 t = (0:(N-1))/fs ;		% вектор часу
 v =D*randn(1,N)  ; 
 s =  A*cos(2*pi*f0*t);
 x =  s+v;
 % Графіки отриманих сигналів
 figure(1)
-subplot(311), plot(t,v), xlim([0,2]), title ('Білий шум'), xlabel('t'), ylabel('y'); 
-subplot(312), plot(t,x), xlim([0,2]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
-subplot(313), plot(t,s), xlim([0,2]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
+subplot(311), plot(t,v), xlim([0,5]), title ('Білий шум'), xlabel('t'), ylabel('y'); 
+subplot(312), plot(t,x), xlim([0,5]), title ('Початковий сигнал з шумом'), xlabel('t'), ylabel('x'); 
+subplot(313), plot(t,s), xlim([0,5]), title ('Початковий сигнал без шуму'), xlabel('t'), ylabel('s'); 
 
 
 %=== Завдання #1.2 ===
