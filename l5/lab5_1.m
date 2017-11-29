@@ -23,33 +23,49 @@ subplot(313), plot(t,s), xlim([0,5]), title ('Початковий сигнал без шуму'), xlab
 % Обчислення оцінки дисперсії шуму, дисперсії сигналу та відношення шум/сигнал
 fprintf('Дисперсия сигнала - %s\n', var(x))
 fprintf('Дисперсия шума - %s\n', var(v))
-fprintf('Отношение шум/сигнал - %s\n', var(v)/var(x))
+fprintf('Отношение шум/сигнал - %s\n',snr(s,v))
 
 %=== Завдання #1.3 ===
 % Обчислення незміщеної оцінки АКФ змодельованого процесу  
-maxlag = fix(x);
-[r, lags]=xcorr(maxlag,'unbiased');
+maxlag = fix(0.1*length(x));
+[r, lags] = xcorr(x, maxlag, 'unbiased');
 figure(2)
-plot(lags, r)
-xlim([-500 500])
+plot(lags, r); 
+
 %=== Завдання #1.4 ===
 % Обчислення зміщеної оцінки АКФ змодельованого процесу  
-[r, lags]=xcorr(maxlag,'biased');
+maxlag = fix(0.9*length(x));
+[r, lags]=xcorr(x,maxlag,'biased');
 figure(3)
 plot(lags, r)
-xlim([-500 500])
+
 
 %=== Завдання #1.5 ===
 % Обчислення оцінки АКФ змодельованого процесу при збільшенні тривалості процесу 
-N = 10000;
-t = (0:(N-1))/fs ;		% вектор часу
 
-v =D*randn(1,N)  ; 
-s =  A*cos(2*pi*f0*t);
-x =  s+v;
-maxlag = fix(x);
-[r, lags]=xcorr(maxlag,'unbiased');
+t = 0:100; 	% вектор часу
+
+maxlag = fix(0.3*length(x));
+[r, lags] = xcorr(x, maxlag, 'unbiased');
 figure(4)
+plot(lags, r); 
+
+
+[r, lags]=xcorr(x,maxlag,'biased');
+figure(5)
 plot(lags, r)
-xlim([-10000 10000])
+
+
+
+t = 0:1000; 	% вектор часу
+
+maxlag = fix(0.3*length(x));
+[r, lags] = xcorr(x, maxlag, 'unbiased');
+figure(6)
+plot(lags, r); 
+
+
+[r, lags]=xcorr(x,maxlag,'biased');
+figure(7)
+plot(lags, r)
 
